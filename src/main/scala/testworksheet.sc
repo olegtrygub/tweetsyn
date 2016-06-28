@@ -1,3 +1,0 @@
-"thousands".contains("thousands")
-
-
