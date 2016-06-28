@@ -1,0 +1,5 @@
+.idea
+dependency-reduced-pom.xml
+insight_project.iml
+target
+src/main/resources/reference.conf
