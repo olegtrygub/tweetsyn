@@ -58,7 +58,6 @@ object TwitterKafkaProducer extends App {
   val kafkaProducer = {
     val props = new Properties()
 
-    props.put("producer.type", "async")
     props.put("bootstrap.servers", brokers)
     props.put("acks", "all")
     props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer")
