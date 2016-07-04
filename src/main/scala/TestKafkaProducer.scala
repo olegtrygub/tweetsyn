@@ -4,7 +4,6 @@ import java.util.Properties
 import scala.io.Source
 import com.typesafe.config.ConfigFactory
 import org.apache.kafka.clients.producer.{ProducerRecord, KafkaProducer}
-import twitter4j.{TwitterObjectFactory, Status, FilterQuery}
 
 object TеstKafkaProducer extends App {
 
