@@ -27,18 +27,18 @@ object TеstKafkaProducer extends App {
   val speed = args(1).toInt
   var cnt = 0
   var start = System.nanoTime
+  val million = 1000000
+  val billion = 1000 * million
   for (line <-Source.fromFile(filePath).getLines) {
-    println(line)
     kafkaProducer.send(new ProducerRecord[String, String](topic, line))
     cnt += 1
     if (cnt >= speed) {
-      val cur = System.nanoTime
-      if ((cur - start) / 1000000000 < 1) {
-        Thread.sleep((1000000000 -(cur-start))/1000000)
+      val elapsed = System.nanoTime - start
+      if (elapsed / billion < 1) {
+        Thread.sleep((billion - elapsed) / million)
       }
-      start = cur
       cnt = 0
+      start = System.nanoTime
     }
   }
-
 }

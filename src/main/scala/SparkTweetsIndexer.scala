@@ -50,6 +50,7 @@ object SparkTweetsIndexer {
     val tweetsForIndexing = twitterStream
       .map(_._2)
       .map(json => TwitterObjectFactory.createStatus(json))
+      .filter(status => status.getLang == "en")
       .map {
         status => new TweetInformation(status.getId,
           status.getText,
