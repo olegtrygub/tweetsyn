@@ -14,7 +14,7 @@ object TestRegisterQueries extends App {
     key <- keys
     query <- key
   } {
-    val e = ESConnection.elasticClient.execute {
+    ESConnection.elasticClient.execute {
       register id query into percolatorIndex query termQuery("text", query)
     }.await
   }

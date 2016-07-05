@@ -22,7 +22,7 @@ object TеstKafkaProducer extends App {
     new KafkaProducer[String, String](props)
   }
 
-  //Throttling at _speed_ per second
+  //Throttling at speed
   val filePath = args(0)
   val speed = args(1).toInt
   var cnt = 0
