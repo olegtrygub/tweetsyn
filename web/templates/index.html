@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- <link rel="stylesheet" href="styles/style.css" media="screen" title="no title" charset="utf-8"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <style media="screen">
+    body {
+        /*font-family:"Gill Sans", "Gill Sans MT", Sans-Serif;*/
+        font-family: Courier, Monaco, monospace;
+    }
+    .container {
+        width:460px;
+        margin:120px auto 0px auto;
+    }
+    h1 {
+        width:460px;
+        margin-bottom:12px;
+        text-align:center;
+        color:#ff4b33;
+        font-size:40px;
+        padding-bottom:8px;
+        border-bottom:2px solid #ff4b33;
+    }
+    form {
+        display:block;
+        width:460px;
+        font-family: Courier, Monaco, monospace;
+    }
+
+    input {
+        display:block;
+        float:left;
+        padding:8px;
+        font-size:16px;
+    }
+
+    #query-subscribe, #query-unsubscribe {
+        width:270px;
+        margin-right:12px;
+        margin-left: 14px;
+        margin-bottom: 12px;
+        font-family: Courier, Monaco, monospace;
+    }
+
+    #submit-subscribe {
+        width:115px;
+        border:none;
+        background:#00b300;
+        padding:10px;
+        border-radius: 3px;
+    }
+
+    #submit-unsubscribe {
+        /*width:88px;*/
+        border:none;
+        background:#ff4b33;
+        padding:10px;
+        border-radius: 3px;
+    }
+
+    #submit-subscribe:hover {
+      background: #adebad;
+    }
+
+    #submit-unsubscribe:hover{
+      background: #ff7866;
+    }
+    .clear {
+        height:1px;
+        width:460px;
+        clear:both;
+    }
+    #result {
+        clear:both;
+        width:460px;
+        margin-top:12px;
+        border-top:2px solid #ff4b33;
+        padding-top:12px;
+        text-align:center;
+    }
+
+    #result p:nth-child(odd) {
+      padding: 5px;
+      text-align: right;
+      /*background-color: #d1e0e0;*/
+      font-family: Courier, Monaco, monospace;
+    }
+
+    #result p:nth-child(even) {
+      padding: 5px;
+      text-align: left;
+    font-family: Courier, Monaco, monospace;
+      background-color:         hsl(180, 23%, 95%);
+    }
+    </style>
+</head>
+    <body>
+      <div class="container">
+          <h1>TweetSyn</h1>
+          <div class="">
+              <input type="text" name="title" id="query-subscribe" placeholder=""/>
+              <input type="submit" value="Subscribe" id="submit-subscribe" />
+          </div>
+          <div class="">
+            <form method="post" action='/unsubscribe' id='unsubscribe-form'>
+              <input type="text" name="title" id="query-unsubscribe" placeholder=""/>
+              <input type="submit" value="Unsubscribe" id="submit-unsubscribe" />
+            </form>
+          </div>
+          <div class="clear"></div>
+
+          <div id="result">
+          </div>
+      </div>
+      <script>
+          function sse() {
+              var source = new EventSource('/stream');
+              var out = document.getElementById('result');
+              source.onmessage = function(e) {
+                  out.innerHTML =  "<p>" + e.data + "</p>" + out.innerHTML;
+              };
+          }
+          $('#submit-subscribe').click(function(){
+            $.post('/subscribe', {'query-subscribe': $('#query-subscribe').val()});
+          });
+          $('#query-subscribe').keyup(function(e){
+            if (e.keyCode == 13) {
+                $.post('/subscribe', {'query-subscribe': $(this).val()});
+            }
+          });
+          sse();
+      </script>
+    </body>
+</html>
