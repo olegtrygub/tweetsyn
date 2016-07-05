@@ -59,6 +59,7 @@ object SparkStreamingSearch {
           (splitQuery(0), splitQuery(1))
         }
       }
+      .filter()
       .mapPartitions (queries => {
           val redis = new RedisClient(AppConfiguration.config.getString("redisConfiguration.host"), 6379)
           Future.sequence(queries.map {
