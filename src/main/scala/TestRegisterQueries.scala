@@ -8,14 +8,14 @@ object TestRegisterQueries extends App {
   val percolatorIndex = AppConfiguration.config.getString("elasticConfiguration.percolatorindex")
 
   val allKeys = redis.keys("*")
+
   for {
     keys <- allKeys
     key <- keys
     query <- key
   } {
-    ESConnection.elasticClient.execute {
+    val e = ESConnection.elasticClient.execute {
       register id query into percolatorIndex query termQuery("text", query)
-    }
+    }.await
   }
-
 }
