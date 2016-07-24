@@ -1,4 +1,4 @@
-package insight.twitterstat.kafka
+package insight.tweetsyn
 
 import java.util.Properties
 

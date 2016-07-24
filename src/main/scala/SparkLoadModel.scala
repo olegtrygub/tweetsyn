@@ -1,4 +1,4 @@
-package insight.twitterstat.spark
+package insight.tweetsyn
 
 import com.typesafe.config.ConfigFactory
 import org.apache.spark.SparkContext

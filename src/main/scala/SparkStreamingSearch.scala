@@ -1,4 +1,4 @@
-package insight.twitterstat.spark
+package insight.tweetsyn
 
 import com.redis._
 import com.sksamuel.elastic4s.ElasticDsl._

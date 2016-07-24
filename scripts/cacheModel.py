@@ -27,7 +27,7 @@ def addSynonymsToRedis(word, syns):
         redis.zadd(word, syn[1], syn[0])
 
 redis = redis.StrictRedis(sys.argv[3], port=6379, db=0)
-first = model.index2word[:int(sys.argv[2])]
+first = model.index2word[32070:int(sys.argv[2])]
 i = 0
 for word in first:
         i = i + 1
