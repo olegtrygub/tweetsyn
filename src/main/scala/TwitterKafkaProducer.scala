@@ -50,7 +50,6 @@ object TwitterKafkaProducer extends App {
     Array(-126.562500,30.448674),
     Array(-61.171875,44.087585))).language(Array("en"))
 
-
   val appConfiguration = ConfigFactory.load()
   val brokers = appConfiguration.getString("kafkaConfiguration.brokers")
   val topic = appConfiguration.getString("kafkaConfiguration.tweetsTopic")

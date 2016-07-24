@@ -2,36 +2,13 @@ package insight.tweetsyn
 
 import com.redis._
 import com.sksamuel.elastic4s.ElasticDsl._
-import com.sksamuel.elastic4s.{ElasticClient, ElasticsearchClientUri}
-import com.typesafe.config.ConfigFactory
 import kafka.serializer.StringDecoder
 import org.apache.spark._
 import org.apache.spark.streaming._
 import org.apache.spark.streaming.kafka.KafkaUtils
-import org.elasticsearch.common.settings.Settings
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent._
-
-object AppConfiguration {
-  lazy val config = ConfigFactory.load()
-}
-
-object ESConnection extends Serializable {
-  val node1 = AppConfiguration.config.getString("elasticConfiguration.node1")
-  val node2 = AppConfiguration.config.getString("elasticConfiguration.node2")
-  val node3 = AppConfiguration.config.getString("elasticConfiguration.node3")
-  val node4 = AppConfiguration.config.getString("elasticConfiguration.node4")
-  val nodes = node1 + ":9300," + node2 + ":9300," + node3 + ":9300," + node4 + ":9300"
-
-  var elasticUri = ElasticsearchClientUri(nodes,
-    List((node1, 9300),
-      (node2, 9300),
-      (node3, 9300),
-      (node4, 9300)))
-  val settings = Settings.settingsBuilder().put("cluster.name", "olegtr").build
-  lazy val elasticClient = ElasticClient.transport(settings, elasticUri)
-}
 
 object SparkStreamingSearch {
 

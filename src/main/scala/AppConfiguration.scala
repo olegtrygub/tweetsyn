@@ -1,6 +1,7 @@
-/**
-  * Created by olegtr on 7/24/16.
-  */
-class AppConfiguration {
+package insight.tweetsyn
 
+import com.typesafe.config.ConfigFactory
+
+object AppConfiguration {
+  lazy val config = ConfigFactory.load()
 }
