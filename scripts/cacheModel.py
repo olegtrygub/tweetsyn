@@ -3,7 +3,7 @@ import redis
 import re
 import sys
 
-model = models.Word2Vec.load_word2vec_format(sys.argv(1), binary=True)
+model = models.Word2Vec.load_word2vec_format(sys.argv[1], binary=True)
 print "model loaded OK"
 
 def tokenize(rawString):
@@ -26,8 +26,8 @@ def addSynonymsToRedis(word, syns):
     for syn in syns:
         redis.zadd(word, syn[1], syn[0])
 
-redis = redis.StrictRedis(sys.argv(3), port=6379, db=0)
-first = model.index2word[:int(sys.argv(2))]
+redis = redis.StrictRedis(sys.argv[3], port=6379, db=0)
+first = model.index2word[:int(sys.argv[2])]
 i = 0
 for word in first:
         i = i + 1

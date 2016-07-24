@@ -123,9 +123,9 @@
           $('#submit-subscribe').click(function(){
             $.post('/subscribe', {'query-subscribe': $('#query-subscribe').val()});
           });
-          $('#query-subscribe').keyup(function(e){
+          $('#query-subscribe').keyup(function(){
             if (e.keyCode == 13) {
-                $.post('/subscribe', {'query-subscribe': $(this).val()});
+              $.post('/subscribe', {'query-subscribe': $(this).val()});
             }
           });
           sse();
